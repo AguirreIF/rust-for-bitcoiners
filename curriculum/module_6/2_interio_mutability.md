@@ -131,7 +131,7 @@ use std::rc::Rc;
 
 struct TreeNode {
     value: RefCell<i32>,
-    children: Vec<Rc<TreeNode>>,
+    children: RefCell<Vec<Rc<TreeNode>>>,
 }
 
 impl TreeNode {
@@ -143,7 +143,7 @@ impl TreeNode {
     }
 
     fn add_child(parent: &Rc<TreeNode>, child: Rc<TreeNode>) {
-        parent.children.push(child);
+        parent.children.borrow_mut().push(child);
     }
 
     fn set_value(&self, new_value: i32) {
